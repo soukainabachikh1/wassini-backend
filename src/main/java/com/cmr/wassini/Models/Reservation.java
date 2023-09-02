@@ -10,6 +10,7 @@ public class Reservation {
     private String nomComplet;
     private String nomCompletAr;
     private String cinDefunt;
+    private String tel;
     private userRelationships userRelationship;
     private Date startDate;
     private Date endDate;
