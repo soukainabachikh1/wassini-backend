@@ -7,6 +7,7 @@ import java.sql.Time;
 import java.util.Date;
 
 @Entity
+@Table(name = "reservation")
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,10 +1,12 @@
 package com.cmr.wassini.Models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name="conjoint")
 public class Conjoint {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column
     private String tel;
