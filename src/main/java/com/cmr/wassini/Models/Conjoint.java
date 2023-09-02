@@ -24,4 +24,76 @@ public class Conjoint {
     private String sexe;
     @Column(name = "unique_key_column", unique = true)
     private String cinDefunt;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public boolean isHasValidMarriagePeriod() {
+        return hasValidMarriagePeriod;
+    }
+
+    public void setHasValidMarriagePeriod(boolean hasValidMarriagePeriod) {
+        this.hasValidMarriagePeriod = hasValidMarriagePeriod;
+    }
+
+    public String getMarialStatus() {
+        return marialStatus;
+    }
+
+    public void setMarialStatus(String marialStatus) {
+        this.marialStatus = marialStatus;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
+    }
+
+    public boolean isInfirm() {
+        return isInfirm;
+    }
+
+    public void setInfirm(boolean infirm) {
+        isInfirm = infirm;
+    }
+
+    public boolean isRetired() {
+        return isRetired;
+    }
+
+    public void setRetired(boolean retired) {
+        isRetired = retired;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
+
+    public String getCinDefunt() {
+        return cinDefunt;
+    }
+
+    public void setCinDefunt(String cinDefunt) {
+        this.cinDefunt = cinDefunt;
+    }
 }
