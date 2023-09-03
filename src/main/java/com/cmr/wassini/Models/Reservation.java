@@ -20,14 +20,14 @@ public class Reservation {
     @Column
     private String nomCompletArabe;
 
-    @Column()
+    @Column(unique = true)
     private String cinDefunt;
 
     @Column
     private String tel;
 
     @Column
-    private userRelationships userRelationship;
+    private String userRelationship;
 
     @Column
 //    @JsonFormat(pattern = "dd/MM/yyyy")
@@ -83,11 +83,11 @@ public class Reservation {
         this.tel = tel;
     }
 
-    public userRelationships getUserRelationship() {
+    public String getUserRelationship() {
         return userRelationship;
     }
 
-    public void setUserRelationship(userRelationships userRelationship) {
+    public void setUserRelationship(String userRelationship) {
         this.userRelationship = userRelationship;
     }
 
