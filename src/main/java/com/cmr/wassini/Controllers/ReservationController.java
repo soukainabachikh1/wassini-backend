@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -27,6 +28,16 @@ public class ReservationController {
         return new ResponseEntity<>(reservations, HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Reservation> getReservationById(@PathVariable Long id) {
+        Optional<Reservation> reservation = reservationService.getReservationById(id);
+
+        if (reservation.isPresent()) {
+            return ResponseEntity.ok(reservation.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
     @PostMapping
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
         Reservation createdReservation = reservationService.createReservation(reservation);
