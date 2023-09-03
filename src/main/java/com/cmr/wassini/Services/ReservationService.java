@@ -25,7 +25,7 @@ public class ReservationService {
     }
 
     public Optional<Reservation> getReservationByCinDefunt(String cinDefunt){
-        return reservationRepo.findByCin(cinDefunt);
+        return reservationRepo.findByCinDefunt(cinDefunt);
     }
 
     public Reservation createReservation(Reservation reservation) {
@@ -38,7 +38,7 @@ public class ReservationService {
             return reservationRepo.save(reservation);
         } else {
             // If the ID is not null, check if an entity with that ID exists.
-            Optional<Reservation> existingReservation = reservationRepo.findByCin(reservation.getCinDefunt());
+            Optional<Reservation> existingReservation = reservationRepo.findByCinDefunt(reservation.getCinDefunt());
             if (existingReservation.isPresent()) {
                 // If an entity with the same ID exists, update it.
                 Reservation updatedReservation = existingReservation.get();

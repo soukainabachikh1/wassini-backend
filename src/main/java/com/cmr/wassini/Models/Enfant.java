@@ -11,20 +11,33 @@ public class Enfant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
     private String nom;
-    @Column
+    private String nomArabe;
+    @Column(nullable = false)
     private Date dateOfBirth;
-    @Column
-    private boolean isCurrently;
-    @Column
+    @Column(nullable = false)
+    private boolean isCurrentlyStudying;
+    @Column(nullable = false)
     private boolean isMarried;
-    @Column
+    @Column(nullable = false)
     private boolean isInfirm;
     @Column
     private InfirmityTypes infirmityType;
-    @Column(name = "unique_key_column", unique = true)
-    private String cinDefunt;
+    @ManyToOne
+    @JoinColumn(name = "cinDefunt")
+    private Defunt defunt;
+
+    public Enfant(long id, String nom, String nomArabe, Date dateOfBirth, boolean isCurrentlyStudying, boolean isMarried, boolean isInfirm, InfirmityTypes infirmityType, Defunt defunt) {
+        this.id = id;
+        this.nom = nom;
+        this.nomArabe = nomArabe;
+        this.dateOfBirth = dateOfBirth;
+        this.isCurrentlyStudying = isCurrentlyStudying;
+        this.isMarried = isMarried;
+        this.isInfirm = isInfirm;
+        this.infirmityType = infirmityType;
+        this.defunt = defunt;
+    }
 
     public long getId() {
         return id;
@@ -50,12 +63,12 @@ public class Enfant {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public boolean isCurrently() {
-        return isCurrently;
+    public boolean isCurrentlyStudying() {
+        return isCurrentlyStudying;
     }
 
-    public void setCurrently(boolean currently) {
-        isCurrently = currently;
+    public void setCurrentlyStudying(boolean currentlyStudying) {
+        isCurrentlyStudying = currentlyStudying;
     }
 
     public boolean isMarried() {
@@ -82,11 +95,18 @@ public class Enfant {
         this.infirmityType = infirmityType;
     }
 
-    public String getCinDefunt() {
-        return cinDefunt;
-    }
-
-    public void setCinDefunt(String cinDefunt) {
-        this.cinDefunt = cinDefunt;
+    @Override
+    public String toString() {
+        return "Enfant{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", nomArabe='" + nomArabe + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", isCurrentlyStudying=" + isCurrentlyStudying +
+                ", isMarried=" + isMarried +
+                ", isInfirm=" + isInfirm +
+                ", infirmityType=" + infirmityType +
+                ", CIN parent décédé=" + defunt +
+                '}';
     }
 }

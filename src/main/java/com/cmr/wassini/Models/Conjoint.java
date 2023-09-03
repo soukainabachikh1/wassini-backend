@@ -22,8 +22,10 @@ public class Conjoint {
     private boolean isRetired;
     @Column
     private String sexe;
-    @Column(name = "unique_key_column", unique = true)
-    private String cinDefunt;
+
+    @ManyToOne
+    @JoinColumn(name = "cinDefunt")
+    private Defunt defunt;
 
     public long getId() {
         return id;
@@ -89,11 +91,4 @@ public class Conjoint {
         this.sexe = sexe;
     }
 
-    public String getCinDefunt() {
-        return cinDefunt;
-    }
-
-    public void setCinDefunt(String cinDefunt) {
-        this.cinDefunt = cinDefunt;
-    }
 }

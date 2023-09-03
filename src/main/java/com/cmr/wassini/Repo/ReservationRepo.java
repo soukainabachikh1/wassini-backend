@@ -13,7 +13,7 @@ public interface ReservationRepo extends JpaRepository<Reservation,Long> {
     List<Reservation> findAll();
     Optional<Reservation> findById(Long id);
 
-    Optional<Reservation> findByCin(String cinDefunt);
+    Optional<Reservation> findByCinDefunt(String cinDefunt);
 
 
 }
