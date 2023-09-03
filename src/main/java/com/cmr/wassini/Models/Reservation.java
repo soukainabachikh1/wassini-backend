@@ -1,6 +1,7 @@
 package com.cmr.wassini.Models;
 
 import com.cmr.wassini.enums.userRelationships;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.sql.Time;
@@ -17,9 +18,9 @@ public class Reservation {
     private String nomComplet;
 
     @Column
-    private String nomCompletAr;
+    private String nomCompletArabe;
 
-    @Column
+    @Column()
     private String cinDefunt;
 
     @Column
@@ -29,16 +30,18 @@ public class Reservation {
     private userRelationships userRelationship;
 
     @Column
-    private Date startDate;
+//    @JsonFormat(pattern = "dd/MM/yyyy")
+    private String startDate;
 
     @Column
-    private Date endDate;
+//    @JsonFormat(pattern = "dd/MM/yyyy")
+    private String endDate;
 
     @Column
-    private Time startHour;
+    private String startHour;
 
     @Column
-    private Time endHour;
+    private String endHour;
 
     public long getId() {
         return id;
@@ -56,12 +59,12 @@ public class Reservation {
         this.nomComplet = nomComplet;
     }
 
-    public String getNomCompletAr() {
-        return nomCompletAr;
+    public String getNomCompletArabe() {
+        return nomCompletArabe;
     }
 
-    public void setNomCompletAr(String nomCompletAr) {
-        this.nomCompletAr = nomCompletAr;
+    public void setNomCompletArabe(String nomCompletArabe) {
+        this.nomCompletArabe = nomCompletArabe;
     }
 
     public String getCinDefunt() {
@@ -88,35 +91,35 @@ public class Reservation {
         this.userRelationship = userRelationship;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
-    public Time getStartHour() {
+    public String getStartHour() {
         return startHour;
     }
 
-    public void setStartHour(Time startHour) {
+    public void setStartHour(String startHour) {
         this.startHour = startHour;
     }
 
-    public Time getEndHour() {
+    public String getEndHour() {
         return endHour;
     }
 
-    public void setEndHour(Time endHour) {
+    public void setEndHour(String endHour) {
         this.endHour = endHour;
     }
 }
