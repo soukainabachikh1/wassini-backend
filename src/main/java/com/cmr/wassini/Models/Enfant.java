@@ -2,6 +2,8 @@ package com.cmr.wassini.Models;
 
 import com.cmr.wassini.enums.InfirmityTypes;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.Date;
 
@@ -23,9 +25,13 @@ public class Enfant {
     private boolean isInfirm;
     @Column
     private InfirmityTypes infirmityType;
-    @ManyToOne
-    @JoinColumn(name = "cinDefunt")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "cinDefunt", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Defunt defunt;
+
+    public Enfant() {
+    }
 
     public Enfant(long id, String nom, String nomArabe, Date dateOfBirth, boolean isCurrentlyStudying, boolean isMarried, boolean isInfirm, InfirmityTypes infirmityType, Defunt defunt) {
         this.id = id;
@@ -93,6 +99,22 @@ public class Enfant {
 
     public void setInfirmityType(InfirmityTypes infirmityType) {
         this.infirmityType = infirmityType;
+    }
+
+    public String getNomArabe() {
+        return nomArabe;
+    }
+
+    public void setNomArabe(String nomArabe) {
+        this.nomArabe = nomArabe;
+    }
+
+    public Defunt getDefunt() {
+        return defunt;
+    }
+
+    public void setDefunt(Defunt defunt) {
+        this.defunt = defunt;
     }
 
     @Override

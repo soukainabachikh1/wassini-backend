@@ -1,6 +1,8 @@
 package com.cmr.wassini.Models;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name="conjoint")
@@ -23,9 +25,11 @@ public class Conjoint {
     @Column
     private String sexe;
 
-    @ManyToOne
-    @JoinColumn(name = "cinDefunt")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "cinDefunt", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Defunt defunt;
+
 
     public long getId() {
         return id;
@@ -91,4 +95,11 @@ public class Conjoint {
         this.sexe = sexe;
     }
 
+    public Defunt getDefunt() {
+        return defunt;
+    }
+
+    public void setDefunt(Defunt defunt) {
+        this.defunt = defunt;
+    }
 }

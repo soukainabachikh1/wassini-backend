@@ -2,46 +2,24 @@ package com.cmr.wassini.Models;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "defunt")
 public class Defunt {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String CIN;
-    @Column
+    @Column(nullable = false)
+    private String cin;
+    @Column(nullable = false)
     private boolean isRetired;
-    @Column
+    @Column(nullable = false)
     private boolean hasChildren;
-    @OneToMany(mappedBy = "defunt")
-    private List<Enfant> enfants;
 
-    @OneToMany(mappedBy = "defunt")
-    private List<Conjoint> conjoints;
-
-    public String getCIN() {
-        return CIN;
+    public String getCin() {
+        return cin;
     }
 
-    public List<Enfant> getEnfants() {
-        return enfants;
-    }
-
-    public void setEnfants(List<Enfant> enfants) {
-        this.enfants = enfants;
-    }
-
-    public List<Conjoint> getConjoints() {
-        return conjoints;
-    }
-
-    public void setConjoints(List<Conjoint> conjoints) {
-        this.conjoints = conjoints;
-    }
-
-    public void setCIN(String CIN) {
-        this.CIN = CIN;
+    public void setCin(String cin) {
+        this.cin = cin;
     }
 
     public boolean isRetired() {
@@ -59,4 +37,7 @@ public class Defunt {
     public void setHasChildren(boolean hasChildren) {
         this.hasChildren = hasChildren;
     }
+
+
+
 }
