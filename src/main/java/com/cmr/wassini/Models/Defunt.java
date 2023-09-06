@@ -13,9 +13,9 @@ public class Defunt implements Serializable {
     @Id
     @Column(nullable = false)
     private String cin;
-    @Column
+    @Column(nullable = false)
     private boolean isRetired;
-    @Column
+    @Column(nullable = false)
     private boolean hasChildren;
 
     @OneToMany(mappedBy = "defunt", cascade = CascadeType.REMOVE)
@@ -26,9 +26,9 @@ public class Defunt implements Serializable {
     @JsonIgnore
     private List<Conjoint> conjoints;
 
-//    @OneToMany(mappedBy = "defunt", cascade = CascadeType.REMOVE)
-//    @JsonIgnore
-//    private List<Reservation> reservations;
+    @OneToMany(mappedBy = "defunt", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private List<Reservation> reservations;
 
     public String getCin() {
         return cin;
@@ -71,11 +71,11 @@ public class Defunt implements Serializable {
     }
 
 
-//    public List<Reservation> getReservations() {
-//        return reservations;
-//    }
-//
-//    public void setReservations(List<Reservation> reservations) {
-//        this.reservations = reservations;
-//    }
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
 }

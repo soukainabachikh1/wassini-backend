@@ -43,14 +43,14 @@ public class Reservation implements Serializable {
     @Column(nullable = false)
     private String endHour;
 
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "cinDefunt")
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnore
-//    private Defunt defunt;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "cinDefunt")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Defunt defunt;
 
-    @Column(nullable = false)
-    private String cinDefunt;
+//    @Column(nullable = false)
+//    private String cinDefunt;
 
 
     public long getId() {
@@ -125,19 +125,19 @@ public class Reservation implements Serializable {
         this.endHour = endHour;
     }
 
-//    public Defunt getDefunt() {
-//        return defunt;
+    public Defunt getDefunt() {
+        return defunt;
+    }
+
+    public void setDefunt(Defunt defunt) {
+        this.defunt = defunt;
+    }
+
+//    public String getCinDefunt() {
+//        return cinDefunt;
 //    }
 //
-//    public void setDefunt(Defunt defunt) {
-//        this.defunt = defunt;
+//    public void setCinDefunt(String cinDefunt) {
+//        this.cinDefunt = cinDefunt;
 //    }
-
-    public String getCinDefunt() {
-        return cinDefunt;
-    }
-
-    public void setCinDefunt(String cinDefunt) {
-        this.cinDefunt = cinDefunt;
-    }
 }

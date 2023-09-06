@@ -5,14 +5,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface ReservationRepo extends JpaRepository<Reservation,Long> {
     // Retrieve all reservations
     List<Reservation> findAll();
-    Optional<Reservation> findById(Long id);
 
+    List<Reservation> findReservationsByDefuntCin(String cin);
+//    List<Reservation> findReservationsById(Long id);
+
+//    List<Reservation> findReservationsByCinDefunt(String cin);
 //    Optional<Reservation> findByCin(String cinDefunt);
 
 
