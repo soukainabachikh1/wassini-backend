@@ -3,9 +3,11 @@ package com.cmr.wassini.Controllers;
 import com.cmr.wassini.Models.Conjoint;
 import com.cmr.wassini.Models.Defunt;
 import com.cmr.wassini.Models.Enfant;
+import com.cmr.wassini.Models.Reservation;
 import com.cmr.wassini.Services.ConjointService;
 import com.cmr.wassini.Services.DefuntService;
 import com.cmr.wassini.Services.EnfantService;
+import com.cmr.wassini.Services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin("http://localhost:4200")
 @RequestMapping("/api")
 public class Controller {
     private final DefuntService defuntService;
@@ -22,11 +25,14 @@ public class Controller {
 
     private final ConjointService conjointService;
 
+    private final ReservationService reservationService;
+
     @Autowired
-    public Controller(DefuntService defuntService, EnfantService enfantService, ConjointService conjointService) {
+    public Controller(DefuntService defuntService, EnfantService enfantService, ConjointService conjointService, ReservationService reservationService) {
         this.defuntService = defuntService;
         this.enfantService = enfantService;
         this.conjointService = conjointService;
+        this.reservationService = reservationService;
     }
 
     //Defunts methods
@@ -132,6 +138,31 @@ public class Controller {
             return conjointService.addConjoint(conjoint);
         }).orElseThrow();
         return new ResponseEntity<>(newConjoint, HttpStatus.CREATED);
+    }
+
+    //Reservation methods
+    @GetMapping("/reservations")
+    public ResponseEntity<List<Reservation>> getAllReservations() {
+        List<Reservation> reservations = reservationService.getAllReservations();
+        return new ResponseEntity<>(reservations, HttpStatus.OK);
+    }
+
+    @GetMapping("/reservations/{id}")
+    //TODO create reservations/id and check service of other models
+    public ResponseEntity<List<Reservation>> getReservationsByCinDefunt(@PathVariable("id") String cin){
+        List<Reservation> reservations = reservationService.findReservationsByCinDefunt(cin);
+        return new ResponseEntity<>(reservations, HttpStatus.OK);
+    }
+
+    @PostMapping("/defunts/{id}/reservations")
+    public ResponseEntity<Reservation> createReservation(@PathVariable("id") String cin, @RequestBody Reservation reservation){
+        System.out.println("reservation");
+        Reservation newReservation = defuntService.findDefuntByCIN(cin).map(defunt -> {
+            System.out.println(defunt);
+            reservation.setDefunt(defunt);
+            return reservationService.createReservation(reservation);
+        }).orElseThrow();
+        return new ResponseEntity<>(newReservation, HttpStatus.CREATED);
     }
 
 
