@@ -19,10 +19,6 @@ public class Reservation {
 
     @Column
     private String nomCompletArabe;
-
-    @Column(unique = true)
-    private String cinDefunt;
-
     @Column
     private String tel;
 
@@ -42,6 +38,10 @@ public class Reservation {
 
     @Column
     private String endHour;
+
+    @ManyToOne
+    @JoinColumn(name = "cinDefunt")
+    private Defunt defunt;
 
     public long getId() {
         return id;
@@ -65,14 +65,6 @@ public class Reservation {
 
     public void setNomCompletArabe(String nomCompletArabe) {
         this.nomCompletArabe = nomCompletArabe;
-    }
-
-    public String getCinDefunt() {
-        return cinDefunt;
-    }
-
-    public void setCinDefunt(String cinDefunt) {
-        this.cinDefunt = cinDefunt;
     }
 
     public String getTel() {
