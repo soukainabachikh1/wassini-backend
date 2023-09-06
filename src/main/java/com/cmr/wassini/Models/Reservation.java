@@ -1,14 +1,19 @@
 package com.cmr.wassini.Models;
 
 import com.cmr.wassini.enums.userRelationships;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
 @Entity
 @Table(name = "reservation")
-public class Reservation {
+public class Reservation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -17,28 +22,36 @@ public class Reservation {
     private String nomComplet;
 
     @Column
-    private String nomCompletAr;
-
-    @Column
-    private String cinDefunt;
-
-    @Column
+    private String nomCompletArabe;
+    @Column(nullable = false)
     private String tel;
 
-    @Column
-    private userRelationships userRelationship;
+    @Column(nullable = false)
+    private String userRelationship;
 
-    @Column
-    private Date startDate;
+    @Column(nullable = false)
+//    @JsonFormat(pattern = "dd/MM/yyyy")
+    private String startDate;
 
-    @Column
-    private Date endDate;
+    @Column(nullable = false)
+//    @JsonFormat(pattern = "dd/MM/yyyy")
+    private String endDate;
 
-    @Column
-    private Time startHour;
+    @Column(nullable = false)
+    private String startHour;
 
-    @Column
-    private Time endHour;
+    @Column(nullable = false)
+    private String endHour;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "cinDefunt")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Defunt defunt;
+
+//    @Column(nullable = false)
+//    private String cinDefunt;
+
 
     public long getId() {
         return id;
@@ -56,20 +69,12 @@ public class Reservation {
         this.nomComplet = nomComplet;
     }
 
-    public String getNomCompletAr() {
-        return nomCompletAr;
+    public String getNomCompletArabe() {
+        return nomCompletArabe;
     }
 
-    public void setNomCompletAr(String nomCompletAr) {
-        this.nomCompletAr = nomCompletAr;
-    }
-
-    public String getCinDefunt() {
-        return cinDefunt;
-    }
-
-    public void setCinDefunt(String cinDefunt) {
-        this.cinDefunt = cinDefunt;
+    public void setNomCompletArabe(String nomCompletArabe) {
+        this.nomCompletArabe = nomCompletArabe;
     }
 
     public String getTel() {
@@ -80,43 +85,59 @@ public class Reservation {
         this.tel = tel;
     }
 
-    public userRelationships getUserRelationship() {
+    public String getUserRelationship() {
         return userRelationship;
     }
 
-    public void setUserRelationship(userRelationships userRelationship) {
+    public void setUserRelationship(String userRelationship) {
         this.userRelationship = userRelationship;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
-    public Time getStartHour() {
+    public String getStartHour() {
         return startHour;
     }
 
-    public void setStartHour(Time startHour) {
+    public void setStartHour(String startHour) {
         this.startHour = startHour;
     }
 
-    public Time getEndHour() {
+    public String getEndHour() {
         return endHour;
     }
 
-    public void setEndHour(Time endHour) {
+    public void setEndHour(String endHour) {
         this.endHour = endHour;
     }
+
+    public Defunt getDefunt() {
+        return defunt;
+    }
+
+    public void setDefunt(Defunt defunt) {
+        this.defunt = defunt;
+    }
+
+//    public String getCinDefunt() {
+//        return cinDefunt;
+//    }
+//
+//    public void setCinDefunt(String cinDefunt) {
+//        this.cinDefunt = cinDefunt;
+//    }
 }

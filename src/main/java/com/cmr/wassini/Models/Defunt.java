@@ -1,24 +1,41 @@
 package com.cmr.wassini.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "defunt")
-public class Defunt {
+public class Defunt implements Serializable {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String CIN;
-    @Column
+    @Column(nullable = false)
+    private String cin;
+    @Column(nullable = false)
     private boolean isRetired;
-    @Column
+    @Column(nullable = false)
     private boolean hasChildren;
 
-    public String getCIN() {
-        return CIN;
+    @OneToMany(mappedBy = "defunt", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private List<Enfant> enfants;
+
+    @OneToMany(mappedBy = "defunt", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private List<Conjoint> conjoints;
+
+    @OneToMany(mappedBy = "defunt", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private List<Reservation> reservations;
+
+    public String getCin() {
+        return cin;
     }
 
-    public void setCIN(String CIN) {
-        this.CIN = CIN;
+    public void setCin(String cin) {
+        this.cin = cin;
     }
 
     public boolean isRetired() {
@@ -35,5 +52,30 @@ public class Defunt {
 
     public void setHasChildren(boolean hasChildren) {
         this.hasChildren = hasChildren;
+    }
+
+    public List<Enfant> getEnfants() {
+        return enfants;
+    }
+
+    public void setEnfants(List<Enfant> enfants) {
+        this.enfants = enfants;
+    }
+
+    public List<Conjoint> getConjoints() {
+        return conjoints;
+    }
+
+    public void setConjoints(List<Conjoint> conjoints) {
+        this.conjoints = conjoints;
+    }
+
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }

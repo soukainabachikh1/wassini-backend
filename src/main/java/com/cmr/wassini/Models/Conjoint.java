@@ -1,10 +1,15 @@
 package com.cmr.wassini.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import java.io.Serializable;
 
 @Entity
 @Table(name="conjoint")
-public class Conjoint {
+public class Conjoint implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -22,8 +27,13 @@ public class Conjoint {
     private boolean isRetired;
     @Column
     private String sexe;
-    @Column(name = "unique_key_column", unique = true)
-    private String cinDefunt;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "cinDefunt", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Defunt defunt;
+
 
     public long getId() {
         return id;
@@ -89,11 +99,11 @@ public class Conjoint {
         this.sexe = sexe;
     }
 
-    public String getCinDefunt() {
-        return cinDefunt;
+    public Defunt getDefunt() {
+        return defunt;
     }
 
-    public void setCinDefunt(String cinDefunt) {
-        this.cinDefunt = cinDefunt;
+    public void setDefunt(Defunt defunt) {
+        this.defunt = defunt;
     }
 }
