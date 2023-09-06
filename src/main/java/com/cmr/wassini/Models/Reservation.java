@@ -2,14 +2,18 @@ package com.cmr.wassini.Models;
 
 import com.cmr.wassini.enums.userRelationships;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
 @Entity
 @Table(name = "reservation")
-public class Reservation {
+public class Reservation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -19,29 +23,35 @@ public class Reservation {
 
     @Column
     private String nomCompletArabe;
-    @Column
+    @Column(nullable = false)
     private String tel;
 
-    @Column
+    @Column(nullable = false)
     private String userRelationship;
 
-    @Column
+    @Column(nullable = false)
 //    @JsonFormat(pattern = "dd/MM/yyyy")
     private String startDate;
 
-    @Column
+    @Column(nullable = false)
 //    @JsonFormat(pattern = "dd/MM/yyyy")
     private String endDate;
 
-    @Column
+    @Column(nullable = false)
     private String startHour;
 
-    @Column
+    @Column(nullable = false)
     private String endHour;
 
-    @ManyToOne
-    @JoinColumn(name = "cinDefunt")
-    private Defunt defunt;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "cinDefunt")
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JsonIgnore
+//    private Defunt defunt;
+
+    @Column(nullable = false)
+    private String cinDefunt;
+
 
     public long getId() {
         return id;
@@ -113,5 +123,21 @@ public class Reservation {
 
     public void setEndHour(String endHour) {
         this.endHour = endHour;
+    }
+
+//    public Defunt getDefunt() {
+//        return defunt;
+//    }
+//
+//    public void setDefunt(Defunt defunt) {
+//        this.defunt = defunt;
+//    }
+
+    public String getCinDefunt() {
+        return cinDefunt;
+    }
+
+    public void setCinDefunt(String cinDefunt) {
+        this.cinDefunt = cinDefunt;
     }
 }
