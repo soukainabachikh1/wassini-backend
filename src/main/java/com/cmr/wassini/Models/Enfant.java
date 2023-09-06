@@ -1,21 +1,25 @@
 package com.cmr.wassini.Models;
 
 import com.cmr.wassini.enums.InfirmityTypes;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "enfant")
-public class Enfant {
+public class Enfant implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nom;
     private String nomArabe;
     @Column(nullable = false)
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dateOfBirth;
     @Column(nullable = false)
     private boolean isCurrentlyStudying;
@@ -28,6 +32,7 @@ public class Enfant {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cinDefunt", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private Defunt defunt;
 
     public Enfant() {
@@ -37,6 +42,7 @@ public class Enfant {
         this.id = id;
         this.nom = nom;
         this.nomArabe = nomArabe;
+
         this.dateOfBirth = dateOfBirth;
         this.isCurrentlyStudying = isCurrentlyStudying;
         this.isMarried = isMarried;

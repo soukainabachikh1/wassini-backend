@@ -24,7 +24,7 @@ public class EnfantService {
         return enfantRepo.findAll();
     }
 
-    public List<Enfant> findEnfantByDefunt(String cin){
+    public List<Enfant> findEnfantByDefuntCin(String cin){
         return enfantRepo.findEnfantByDefuntCin(cin);
     }
 

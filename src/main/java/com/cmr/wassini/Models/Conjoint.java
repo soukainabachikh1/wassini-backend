@@ -1,12 +1,15 @@
 package com.cmr.wassini.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name="conjoint")
-public class Conjoint {
+public class Conjoint implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -28,6 +31,7 @@ public class Conjoint {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cinDefunt", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private Defunt defunt;
 
 
