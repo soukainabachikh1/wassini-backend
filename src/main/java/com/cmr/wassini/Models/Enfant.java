@@ -1,19 +1,25 @@
 package com.cmr.wassini.Models;
 
 import com.cmr.wassini.enums.InfirmityTypes;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "enfant")
-public class Enfant {
+public class Enfant implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nom;
     private String nomArabe;
     @Column(nullable = false)
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dateOfBirth;
     @Column(nullable = false)
     private boolean isCurrentlyStudying;
@@ -23,14 +29,20 @@ public class Enfant {
     private boolean isInfirm;
     @Column
     private InfirmityTypes infirmityType;
-    @ManyToOne
-    @JoinColumn(name = "cinDefunt")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "cinDefunt", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private Defunt defunt;
+
+    public Enfant() {
+    }
 
     public Enfant(long id, String nom, String nomArabe, Date dateOfBirth, boolean isCurrentlyStudying, boolean isMarried, boolean isInfirm, InfirmityTypes infirmityType, Defunt defunt) {
         this.id = id;
         this.nom = nom;
         this.nomArabe = nomArabe;
+
         this.dateOfBirth = dateOfBirth;
         this.isCurrentlyStudying = isCurrentlyStudying;
         this.isMarried = isMarried;
@@ -93,6 +105,22 @@ public class Enfant {
 
     public void setInfirmityType(InfirmityTypes infirmityType) {
         this.infirmityType = infirmityType;
+    }
+
+    public String getNomArabe() {
+        return nomArabe;
+    }
+
+    public void setNomArabe(String nomArabe) {
+        this.nomArabe = nomArabe;
+    }
+
+    public Defunt getDefunt() {
+        return defunt;
+    }
+
+    public void setDefunt(Defunt defunt) {
+        this.defunt = defunt;
     }
 
     @Override

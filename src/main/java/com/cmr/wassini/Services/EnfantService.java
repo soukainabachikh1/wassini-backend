@@ -24,11 +24,15 @@ public class EnfantService {
         return enfantRepo.findAll();
     }
 
+    public List<Enfant> findEnfantByDefuntCin(String cin){
+        return enfantRepo.findEnfantByDefuntCin(cin);
+    }
+
     public Enfant updateEnfant(Enfant enfant){
         return enfantRepo.save(enfant);
     }
 
     public void deleteEnfant(Long id){
-        enfantRepo.deleteEnfantById(id);
+        enfantRepo.deleteById(id);
     }
 }
